@@ -46,7 +46,7 @@
 				<div class="card-content">
 					{{ if .Icon }}
 					<div class="card-icon-col">
-						<img src="{{ .Icon }}" alt="{{ .Name }} icon" class="service-icon">
+						<img src="{{ .Icon }}" alt="{{ .Name }} icon">
 					</div>
 					<div class="card-main-col">
 						<h2 class="card-title">
@@ -66,7 +66,7 @@
 						</div>
 					</div>
 					{{ else }}
-					<div class="card-icon-col card-health-col card-health-col-wide">
+					<div class="card-health-col">
 						<div class="health-indicator-container">
 							<span class="health-icon pending" title="Checking..."></span>
 							<span class="health-text"></span>
@@ -75,8 +75,8 @@
 					<div class="card-main-col">
 						<h2 class="card-title">
 							{{ if .Url }}
-							<a href="{{ .Url }}" target="_blank" rel="noopener">{{ .Name
-								}}</a>
+							<a href="{{ .Url }}" target="_blank" rel="noopener">{{
+								.Name}}</a>
 							{{ else }}
 							{{ .Name }}
 							{{ end }}
