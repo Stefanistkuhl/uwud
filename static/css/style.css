@@ -1,0 +1,317 @@
+/* Light/Dark theme variables */
+:root {
+	--bg: #f8f9fb;
+	--bg-alt: #fff;
+	--text: #23243a;
+	--header-bg: #f6e6f9;
+	--footer-bg: #f6e6f9;
+	--card-bg: #fff;
+	--card-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+	--accent: #ff69b4;
+	--accent-hover: #ff2fa0;
+	--icon-bg: #fce4ec;
+	--scrollbar-bg: #e0e0e0;
+	--scrollbar-thumb: #ff69b4;
+	--scrollbar-thumb-hover: #ff2fa0;
+	--github-link: #23243a;
+	--github-link-hover: var(--accent);
+	--layout-gap: 25px;
+}
+
+body.dark {
+	--bg: #181926;
+	--bg-alt: #23243a;
+	--text: #f8f9fb;
+	--header-bg: #23243a;
+	--footer-bg: #23243a;
+	--card-bg: #23243a;
+	--card-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+	--accent: #ff69b4;
+	--accent-hover: #ff2fa0;
+	--icon-bg: #2e2e4d;
+	--scrollbar-bg: transparent;
+	--scrollbar-thumb: #ff69b4;
+	--scrollbar-thumb-hover: #ff2fa0;
+	--github-link: #f8f9fb;
+	--github-link-hover: var(--accent);
+}
+
+body {
+	background: var(--bg);
+	color: var(--text);
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0;
+	transition: background 0.3s, color 0.3s;
+	font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+	scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
+	scrollbar-width: thin;
+}
+
+header {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+	min-height: 80px;
+	gap: 20px;
+	background-color: var(--header-bg);
+	color: var(--text);
+	padding: 1rem var(--layout-gap) 1.5rem var(--layout-gap);
+	column-gap: var(--layout-gap);
+	text-align: center;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	position: relative;
+	transition: background 0.3s, color 0.3s;
+}
+
+.header-image {
+	flex-shrink: 0;
+	flex: 0 0 auto;
+	justify-self: start;
+}
+
+.header-image img {
+	width: 100%;
+	height: auto;
+	max-height: 80px;
+}
+
+.header-text {
+	flex-grow: 1;
+	text-align: center;
+}
+
+h1 {
+	font-size: 2em;
+	margin: 0.5rem 0;
+	letter-spacing: -1px;
+}
+
+p {
+	margin-bottom: 0.5rem;
+}
+
+main {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.dashboard-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 25px;
+	padding: 20px;
+}
+
+.card {
+	background-color: var(--card-bg);
+	border-radius: 14px;
+	box-shadow: var(--card-shadow);
+	padding: 28px 25px 22px 25px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	transition: transform 0.18s cubic-bezier(.4, 2, .6, 1), box-shadow 0.18s;
+	border: 2px solid transparent;
+}
+
+.card:hover {
+	transform: translateY(-7px) scale(1.025);
+	box-shadow: 0 6px 24px rgba(255, 105, 180, 0.13);
+	border-color: var(--accent);
+}
+
+.card h2 {
+	font-size: 1.5em;
+	margin-top: 0;
+	margin-bottom: 10px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.card h2 a {
+	color: var(--accent);
+	text-decoration: none;
+	transition: color 0.2s;
+	font-weight: 600;
+}
+
+.card h2 a:hover {
+	color: var(--accent-hover);
+	text-shadow: 0 2px 8px rgba(255, 105, 180, 0.15);
+}
+
+.card .description {
+	font-size: 1em;
+	color: #888;
+	flex-grow: 1;
+}
+
+.status-indicator {
+	margin-top: 15px;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	font-size: 1em;
+}
+
+.health-icon {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	border-radius: 50%;
+	margin-right: 8px;
+	font-size: 1.2em;
+	position: relative;
+	top: -1px;
+}
+
+.health-icon.pending {
+	color: #f1c40f;
+}
+
+.health-icon.success {
+	color: #27ae60;
+}
+
+.health-icon.failure {
+	color: #e74c3c;
+}
+
+.service-icon {
+	vertical-align: middle;
+	margin-right: 8px;
+	width: 32px;
+	height: 32px;
+	border-radius: 6px;
+	object-fit: cover;
+	background: var(--icon-bg);
+	box-shadow: 0 1px 4px rgba(255, 105, 180, 0.08);
+}
+
+
+#theme-toggle {
+	position: static;
+	background: none;
+	border: none;
+	border-radius: 50%;
+	padding: 0.5rem;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(255, 105, 180, 0.08);
+	transition: background 0.2s, box-shadow 0.2s;
+	color: var(--accent);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	justify-self: end;
+}
+
+#theme-toggle:hover {
+	background: none;
+	color: #fff;
+	box-shadow: 0 4px 16px rgba(255, 105, 180, 0.18);
+}
+
+#theme-toggle svg {
+	display: block;
+}
+
+footer {
+	text-align: center;
+	padding: 0.7rem 0;
+	margin-top: auto;
+	background-color: var(--footer-bg);
+	color: var(--text);
+	font-size: 0.95em;
+	letter-spacing: 0.01em;
+	transition: background 0.3s, color 0.3s;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.footer-line {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5em;
+	margin: 0;
+}
+
+.footer-link {
+	font-weight: bold;
+	color: inherit;
+	text-decoration: none;
+	transition: color 0.2s;
+}
+
+.footer-link:hover {
+	color: var(--accent);
+}
+
+.github-link {
+	font-weight: bold;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4em;
+	color: inherit;
+	text-decoration: none;
+	transition: color 0.2s;
+}
+
+.github-link:hover {
+	color: var(--accent);
+}
+
+.name {
+	font-weight: bold;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	background: var(--scrollbar-bg);
+	border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--scrollbar-thumb);
+	border-radius: 8px;
+	transition: background 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--scrollbar-thumb-hover);
+}
+
+::-webkit-scrollbar-corner {
+	background: var(--scrollbar-bg);
+}
+
+body {
+	scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
+	scrollbar-width: thin;
+}
+
+@media (max-width: 600px) {
+	.dashboard-grid {
+		grid-template-columns: 1fr;
+		padding: 10px;
+	}
+
+	.card {
+		padding: 18px 10px 14px 10px;
+	}
+
+	#theme-toggle {
+		top: 50%;
+		right: 0.7rem;
+		transform: translateY(-50%);
+		background: none;
+	}
+}
