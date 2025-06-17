@@ -16,6 +16,7 @@
 	--github-link: #23243a;
 	--github-link-hover: var(--accent);
 	--layout-gap: 25px;
+	/*NOTE: Value of gap used in header and section headers*/
 	--icon-min: 64px;
 	--icon-max: 16.66%;
 }
@@ -46,7 +47,7 @@ body {
 	min-height: 100vh;
 	margin: 0;
 	transition: background 0.3s, color 0.3s;
-	font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+	font-family: "Inter", "Segoe UI", Arial, sans-serif;
 	scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
 	scrollbar-width: thin;
 }
@@ -60,6 +61,7 @@ header {
 	background-color: var(--header-bg);
 	color: var(--text);
 	padding: 1rem var(--layout-gap) 1.5rem var(--layout-gap);
+	/*NOTE: This gap was previously inheritated by the section headers. Now have given the section headers their own padding.*/
 	column-gap: var(--layout-gap);
 	text-align: center;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -103,7 +105,7 @@ main {
 .dashboard-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-	gap: 25px;
+	gap: 5px;
 	padding: 20px;
 }
 
@@ -111,12 +113,12 @@ main {
 	background-color: var(--card-bg);
 	border-radius: 14px;
 	box-shadow: var(--card-shadow);
-	padding: 28px 25px 22px 25px;
+	padding: 15px;
+	margin: 10px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	transition: transform 0.18s cubic-bezier(.4, 2, .6, 1),
-		box-shadow 0.18s;
+	transition: transform 0.18s cubic-bezier(0.4, 2, 0.6, 1), box-shadow 0.18s;
 	border: 2px solid transparent;
 }
 
@@ -149,6 +151,8 @@ main {
 
 .card-title {
 	margin: 0 0 8px 0;
+	font-size: 16px;
+	color: #333;
 }
 
 .description {
@@ -259,7 +263,6 @@ main {
 	background: var(--icon-bg);
 	box-shadow: 0 1px 4px rgba(255, 105, 180, 0.08);
 }
-
 
 #theme-toggle {
 	position: static;
@@ -379,5 +382,78 @@ body {
 		right: 0.7rem;
 		transform: translateY(-50%);
 		background: none;
+	}
+}
+
+.section-container,
+.section-header {
+	background: none !important;
+	border: 0 !important;
+	box-shadow: none !important;
+}
+
+.section-container {
+	margin: 5px;
+	padding: 0;
+}
+
+.section-header {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+	text-align: left;
+	background: none !important;
+	border: 0 !important;
+	box-shadow: none !important;
+	margin: 0.15rem 0 0 0;
+	/* NOTE: Gap above section headers; margin: top bottom left right*/
+	padding: 0 var(--layout-gap) 0rem var(--layout-gap);
+	/* NOTE: Gap between section headers and content; padding: top bottom left right*/
+	font-size: 1rem;
+	line-height: 1.35;
+	color: var(--text);
+	opacity: 0.85;
+}
+
+.section-header img {
+	width: 64px;
+	height: 64px;
+	object-fit: contain;
+	background: none;
+	box-shadow: none;
+	justify-self: center;
+	align-self: center;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+	flex-shrink: 0;
+}
+
+.section-header h2 {
+	margin: 0;
+}
+
+.section-header:not(:has(img)) {
+	gap: 0;
+}
+
+.section-items {
+	margin-top: 0 !important;
+}
+
+@media (max-width: 460px) {
+	.section-header {
+		gap: 14px;
+	}
+}
+
+.section-header:not(:has(img)) h2,
+.section-header:not(:has(img)) {
+	grid-column: 1;
+}
+
+@media (max-width: 460px) {
+	.section-header {
+		column-gap: 14px;
 	}
 }

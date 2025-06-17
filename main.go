@@ -14,19 +14,27 @@ import (
 )
 
 type Config struct {
-	General GeneralSettings `toml:"general"`
-	Items   []Item          `toml:"item"`
+	General  GeneralSettings `toml:"general"`
+	Sections []Section       `toml:"sections"`
 }
 
 type GeneralSettings struct {
-	Title string `toml:"title"`
-	Desc  string `toml:"desc"`
-	Icon  string `toml:"icon"`
+	Title   string `toml:"title"`
+	Desc    string `toml:"desc"`
+	Icon    string `toml:"icon"`
+	Columns int    `toml:"columns"`
+}
+
+type Section struct {
+	Name        string `toml:"name"`
+	Description string `toml:"description"`
+	Icon        string `toml:"icon"`
+	Items       []Item `toml:"items"`
 }
 
 type Item struct {
 	Name   string `toml:"name"`
-	Url    string `toml:"url"`
+	URL    string `toml:"url"`
 	Desc   string `toml:"desc"`
 	Health string `toml:"health"`
 	Icon   string `toml:"icon"`
@@ -47,7 +55,6 @@ func main() {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "invalid URL"})
 			return
 		}
-		fmt.Println(decodedURL)
 
 		parsedURL, err := url.Parse(decodedURL)
 		if err != nil {
@@ -99,7 +106,8 @@ func main() {
 			"Title":       conf.General.Title,
 			"Description": conf.General.Desc,
 			"Icon":        conf.General.Icon,
-			"Items":       conf.Items,
+			"Columns":     conf.General.Columns,
+			"Sections":    conf.Sections,
 		})
 	})
 

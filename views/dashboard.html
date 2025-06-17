@@ -6,7 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{{ .Title }}</title>
 	<link rel="stylesheet" href="/static/css/style.css">
-	<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/images/icon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/static/images/icon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/static/images/icon/favicon-16x16.png">
+	<link rel="manifest" href="/static/images/icon/site.webmanifest">
 </head>
 
 <body>
@@ -40,52 +43,65 @@
 	</header>
 
 	<main>
-		<div class="dashboard-grid">
-			{{ range .Items }}
-			<div class="card" data-health-check-url="{{ .Health }}" id="item-{{ .Name }}">
-				<div class="card-content">
-					{{ if .Icon }}
-					<div class="card-icon-col">
-						<img src="{{ .Icon }}" alt="{{ .Name }} icon">
-					</div>
-					<div class="card-main-col">
-						<h2 class="card-title">
-							{{ if .Url }}
-							<a href="{{ .Url }}" target="_blank" rel="noopener">{{ .Name
-								}}</a>
+		<div class="dashboard-grid" style="grid-template-columns: repeat({{ .Columns }}, 1fr);">
+			{{ range .Sections }}
+			<section class="section-container">
+				<header class="section-header">
+					{{ if .Icon }}<img src="{{ .Icon }}" alt="{{ .Name }} icon">{{ end }}
+					<h2>{{ .Name }}</h2>
+				</header>
+				<div class="section-items">
+					{{ range .Items }}
+					<div class="card" data-health-check-url="{{ .Health }}" id="item-{{ .Name }}">
+						<div class="card-content">
+							{{ if .Icon }}
+							<div class="card-icon-col">
+								<img src="{{ .Icon }}" alt="{{ .Name }} icon">
+							</div>
+							<div class="card-main-col">
+								<h2 class="card-title">
+									{{ if .URL }}
+									<a href="{{ .URL }}" target="_blank"
+										rel="noopener">{{
+										.Name}}</a>
+									{{ else }}
+									{{ .Name }}
+									{{ end }}
+								</h2>
+								<p class="description">{{ .Desc }}</p>
+							</div>
+							<div class="card-health-col">
+								<div class="health-indicator-container">
+									<span class="health-icon pending"
+										title="Checking..."></span>
+									<span class="health-text"></span>
+								</div>
+							</div>
 							{{ else }}
-							{{ .Name }}
+							<div class="card-health-col">
+								<div class="health-indicator-container">
+									<span class="health-icon pending"
+										title="Checking..."></span>
+									<span class="health-text"></span>
+								</div>
+							</div>
+							<div class="card-main-col">
+								<h2 class="card-title">
+									{{ if .URL }}
+									<a href="{{ .URL }}" target="_blank"
+										rel="noopener">{{ .Name }}</a>
+									{{ else }}
+									{{ .Name }}
+									{{ end }}
+								</h2>
+								<p class="description">{{ .Desc }}</p>
+							</div>
 							{{ end }}
-						</h2>
-						<p class="description">{{ .Desc }}</p>
-					</div>
-					<div class="card-health-col">
-						<div class="health-indicator-container">
-							<span class="health-icon pending" title="Checking..."></span>
-							<span class="health-text"></span>
 						</div>
-					</div>
-					{{ else }}
-					<div class="card-health-col">
-						<div class="health-indicator-container">
-							<span class="health-icon pending" title="Checking..."></span>
-							<span class="health-text"></span>
-						</div>
-					</div>
-					<div class="card-main-col">
-						<h2 class="card-title">
-							{{ if .Url }}
-							<a href="{{ .Url }}" target="_blank" rel="noopener">{{
-								.Name}}</a>
-							{{ else }}
-							{{ .Name }}
-							{{ end }}
-						</h2>
-						<p class="description">{{ .Desc }}</p>
 					</div>
 					{{ end }}
 				</div>
-			</div>
+			</section>
 			{{ end }}
 		</div>
 	</main>
