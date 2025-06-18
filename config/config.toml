@@ -5,7 +5,7 @@ icon="https://cdn.7tv.app/emote/01F6NM2T080003C6R1CKK0T0P2/4x.avif"
 columns=3
 
 [[sections]]
-name = "My First Section"
+name = ""
 description = "Services for the first category."
 icon = "https://cdn.7tv.app/emote/01G6WYS1RR0004RPYH3C4ANGVV/4x.avif"
 [[sections.items]]
@@ -79,4 +79,4 @@ health="https://100.114.49.127"
 [[sections.items]]
 name="some service 3"
 url="https://100.114.49.127"
-desc="some desc 3 this thing has no health check"
+desc="iajsfiajfiajfiajfij"

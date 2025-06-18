@@ -1,0 +1,13 @@
+services:
+  uwud:
+    container_name: uwud
+    image: uwud:latest
+    build:
+      context: .
+    restart:  unless-stopped
+    volumes:
+      - ./config:/app/config
+    environment:
+      - GIN_MODE=debug
+    ports:
+      - 80:8080

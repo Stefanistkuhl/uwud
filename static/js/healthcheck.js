@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				iconElement.title = 'Health check failed';
 				iconElement.classList.remove('pending', 'success');
 				iconElement.classList.add('failure');
-				console.error(`Health check failed for ${url}:`, error);
 			});
 	}
+});
 });
