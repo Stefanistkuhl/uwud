@@ -1,9 +1,12 @@
 services:
   uwud:
     container_name: uwud
-    image: raketenkult/uwud:latest
+    image: uwud:latest
+    build:
+      context: .
     restart:  unless-stopped
     volumes:
       - ./config:/app/config
+      - ./images:/app/static/images/custom
     ports:
       - 80:8080

@@ -28,3 +28,4 @@ go.work
 
 config/config.toml
 ./images
+./docker-compose-dev.yml
