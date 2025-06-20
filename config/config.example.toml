@@ -1,0 +1,45 @@
+[general]
+title="My Dashboard"
+desc="A simple overview of my services."
+icon="" # Can be any image URL
+columns=2
+
+[[sections]]
+name="Section One"
+description="Services in the first group."
+icon="" # Can be any image URL
+[[sections.items]]
+name="Service A"
+url="https://example.com/service-a" # Placeholder URL
+desc="Description for Service A."
+health="https://example.com/service-a/health" # Placeholder URL
+icon="" # Can be any image URL
+[[sections.items]]
+name="Service B"
+url="https://example.com/service-b" # Placeholder URL
+desc="Description for Service B."
+health="https://example.com/service-b/status" # Placeholder URL
+[[sections.items]]
+name="Service C"
+url="https://example.com/service-c" # Placeholder URL
+desc="Description for Service C."
+icon="" # Can be any image URL
+
+[[sections]]
+name="Section Two"
+description="Services in the second group."
+[[sections.items]]
+name="Service D"
+url="https://example.com/service-d" # Placeholder URL
+desc="Description for Service D."
+health="https://example.com/service-d/healthcheck" # Placeholder URL
+icon="" # Can be any image URL
+[[sections.items]]
+name="Service E"
+url="https://example.com/service-e" # Placeholder URL
+desc="Description for Service E."
+health="https://example.com/service-e/api/v1/status" # Placeholder URL
+[[sections.items]]
+name="Service F"
+url="https://example.com/service-f" # Placeholder URL
+desc="Description for Service F."

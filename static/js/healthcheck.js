@@ -60,11 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			})
 			.catch(error => {
+				console.error('Health check fetch error:', error);
 				iconElement.innerHTML = svgDown();
 				iconElement.title = 'Health check failed';
 				iconElement.classList.remove('pending', 'success');
 				iconElement.classList.add('failure');
 			});
 	}
-});
 });

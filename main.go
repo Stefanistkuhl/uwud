@@ -51,6 +51,7 @@ func main() {
 	if loadConfErr != nil {
 		log.Fatalf("Failed to load configuration: %v", loadConfErr)
 	}
+	conf = fixImagePath(conf)
 	configHolder.Store(conf)
 
 	var lastModTime time.Time
@@ -72,11 +73,12 @@ func main() {
 			if isAfter {
 				time.Sleep(100 * time.Millisecond)
 
-				newCfg, err := loadConfig(configPath)
+				newConf, err := loadConfig(configPath)
 				if err != nil {
 					log.Printf("[ERROR] Failed to load new configuration from %s: %v\n", configPath, err)
 				} else {
-					configHolder.Store(newCfg)
+					newConf = fixImagePath(newConf)
+					configHolder.Store(newConf)
 					lastModTime = currentModTime
 					log.Printf("[INFO] Configuration reloaded successfully. New lastModTime: %s\n", lastModTime.Format(time.RFC3339Nano))
 				}
@@ -87,7 +89,7 @@ func main() {
 	}()
 
 	r := gin.Default()
-	r.LoadHTMLGlob("views/*.html")
+	r.LoadHTMLGlob("views/dashboard.html")
 
 	r.GET("/healthcheck", handleHealthcheck)
 	r.Static("/static", "./static")
@@ -169,4 +171,30 @@ func handleHealthcheck(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusServiceUnavailable, gin.H{"status": "down", "code": resp.StatusCode})
 	}
+}
+
+func IsValidURL(rawURL string) bool {
+	_, err := url.ParseRequestURI(rawURL)
+	return err == nil
+}
+
+func fixImagePath(conf *Config) *Config {
+	if conf.General.Icon != "" && !IsValidURL(conf.General.Icon) {
+		conf.General.Icon = "static/images/custom/" + conf.General.Icon
+	}
+	for i := range conf.Sections {
+		section := &conf.Sections[i]
+		if section.Icon != "" && !IsValidURL(section.Icon) {
+			section.Icon = "static/images/custom/" + section.Icon
+		}
+		for j := range section.Items {
+			item := &conf.Sections[i].Items[j]
+			if item.Icon != "" && !IsValidURL(item.Icon) {
+				item.Icon = "static/images/custom/" + item.Icon
+			}
+
+		}
+	}
+	return conf
+
 }
